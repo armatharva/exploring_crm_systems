@@ -1,6 +1,8 @@
 # CRM Research
 
-## 1. What is CRM?
+## Questions to Explore
+
+### 1. What is CRM?
 
 **Definition**
 
@@ -88,23 +90,9 @@ Modern CRM Features:
 * Workflow automation
 * Integration with other business tools
 
-**Reflection - Topic 1: What is CRM?**
-
-Which AI tool generated the response?
-Claude
-
-Was the response complete?
-YES - Covered definition, purpose, history, evolution, and modern features as required.
-
-Did you verify the information?
-YES - CRM history timeline and evolution stages are accurate and verifiable.
-
-How trustworthy was the result?
-TRUSTWORTHY (8/10) - Accurate definitions, correct historical timeline, and logical evolution progression.
-
 ---
 
-## 2. Why Do Organizations Use CRM Systems?
+### 2. Why Do Organizations Use CRM Systems?
 
 Organizations use Customer Relationship Management (CRM) systems to improve relationships with customers, increase sales, and make business operations more efficient. CRM systems help different departments work together by storing customer information in one central location.
 
@@ -167,23 +155,9 @@ Benefits:
 
 Organizations use CRM systems to manage sales, organize customer information, improve marketing, provide better customer support, and analyze business performance. By centralizing customer data and automating many business processes, CRM systems help companies increase efficiency, strengthen customer relationships, and drive business growth.
 
-**Reflection - Topic 2: Why Do Organizations Use CRM Systems?**
-
-Which AI tool generated the response?
-Claude
-
-Was the response complete?
-YES - All five required areas covered: sales management, customer management, marketing, customer support, and reporting/analytics.
-
-Did you verify the information?
-YES - All benefits described match actual CRM platform capabilities found in Salesforce, HubSpot, and Zoho.
-
-How trustworthy was the result?
-TRUSTWORTHY (8/10) - Comprehensive coverage of all five areas. Explanations are practical and match real CRM capabilities.
-
 ---
 
-## 3. What Business Problems Do CRM Systems Solve?
+### 3. What Business Problems Do CRM Systems Solve?
 
 CRM systems help organizations solve common business problems by improving customer relationships, organizing information, and increasing efficiency. Different industries use CRM systems in different ways.
 
@@ -276,23 +250,9 @@ A nonprofit organization uses CRM to manage donor records, track donations, and 
 
 CRM systems solve many business problems by organizing customer information, improving communication, automating routine tasks, and providing valuable insights. Whether in retail, healthcare, education, manufacturing, or nonprofits, CRM helps organizations operate more efficiently, improve customer or stakeholder relationships, and achieve better business outcomes.
 
-**Reflection - Topic 3: What Business Problems Do CRM Systems Solve?**
-
-Which AI tool generated the response?
-Claude
-
-Was the response complete?
-YES - All five required industries covered: retail, healthcare, education, manufacturing, and nonprofits with problem, solution, and examples.
-
-Did you verify the information?
-YES - All business problems are real industry challenges. CRM solutions are appropriate and logical for each problem.
-
-How trustworthy was the result?
-TRUSTWORTHY (8/10) - Real industry problems accurately identified. Solutions logically address problems. Examples demonstrate practical CRM applications.
-
 ---
 
-## 4. Major Modules Found in a CRM
+### 4. What Are the Major Modules Found in a CRM?
 
 CRM systems are made up of different modules, each designed to manage a specific part of the customer relationship process. Together, these modules help businesses organize information, improve communication, and increase efficiency.
 
@@ -448,16 +408,70 @@ Purpose:
 
 The major CRM modules work together to manage every stage of the customer relationship. Contacts and Accounts organize customer information, Leads and Opportunities help manage sales, Activities and Tasks track daily work, Marketing Campaigns attract customers, Customer Support Tickets resolve issues, and Reports and Dashboards provide insights to improve business decisions.
 
-**Reflection - Topic 4: Major Modules Found in a CRM**
+---
 
-Which AI tool generated the response?
+## Reflection
+
+For each major topic, answer:
+
+### Topic 1: What is CRM?
+
+**Which AI tool generated the response?**
 Claude
 
-Was the response complete?
+**Was the response complete?**
+YES - Covered definition, purpose, history, evolution, and modern features as required.
+
+**Did you verify the information?**
+YES - CRM history timeline and evolution stages are accurate and verifiable.
+
+**How trustworthy was the result?**
+TRUSTWORTHY (8/10) - Accurate definitions, correct historical timeline, and logical evolution progression.
+
+---
+
+### Topic 2: Why Do Organizations Use CRM Systems?
+
+**Which AI tool generated the response?**
+Claude
+
+**Was the response complete?**
+YES - All five required areas covered: sales management, customer management, marketing, customer support, and reporting/analytics.
+
+**Did you verify the information?**
+YES - All benefits described match actual CRM platform capabilities found in Salesforce, HubSpot, and Zoho.
+
+**How trustworthy was the result?**
+TRUSTWORTHY (8/10) - Comprehensive coverage of all five areas. Explanations are practical and match real CRM capabilities.
+
+---
+
+### Topic 3: What Business Problems Do CRM Systems Solve?
+
+**Which AI tool generated the response?**
+Claude
+
+**Was the response complete?**
+YES - All five required industries covered: retail, healthcare, education, manufacturing, and nonprofits with problem, solution, and examples.
+
+**Did you verify the information?**
+YES - All business problems are real industry challenges. CRM solutions are appropriate and logical for each problem.
+
+**How trustworthy was the result?**
+TRUSTWORTHY (8/10) - Real industry problems accurately identified. Solutions logically address problems. Examples demonstrate practical CRM applications.
+
+---
+
+### Topic 4: What Are the Major Modules Found in a CRM?
+
+**Which AI tool generated the response?**
+Claude
+
+**Was the response complete?**
 YES - All 10 required modules explained: Contacts, Accounts, Leads, Opportunities, Activities, Tasks, Marketing Campaigns, Customer Support Tickets, Reports, and Dashboards.
 
-Did you verify the information?
+**Did you verify the information?**
 YES - Module descriptions verified against actual CRM platforms: Salesforce, HubSpot, and Zoho CRM.
 
-How trustworthy was the result?
+**How trustworthy was the result?**
 VERY TRUSTWORTHY (9/10) - All modules accurately described. Descriptions match actual platform capabilities and standard CRM terminology across all major platforms.
