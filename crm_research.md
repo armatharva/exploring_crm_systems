@@ -764,4 +764,204 @@ If we had installed locally, challenges would likely include:
 
 
 
+# Part 4: AI-Assisted CRM Architecture Exploration
 
+## Proposed Stack
+
+- **Front-End:** HTML, CSS, JavaScript, jQuery, Bootstrap
+- **Server-Side:** PHP
+- **Database:** MySQL
+
+---
+
+## Functional Modules
+
+A CRM built on this stack would need the following core modules for a working V1:
+
+| Module | Purpose |
+|---|---|
+| **Authentication** | User login/logout, session management, password reset, role-based access (Admin, Manager, Sales Rep) |
+| **Contacts** | Store and manage individual customer/contact records |
+| **Accounts** | Manage company-level records tied to one or more contacts |
+| **Leads** | Capture and qualify potential customers before they become opportunities |
+| **Opportunities** | Track active deals through sales stages, with value and close date |
+| **Activities/Tasks** | Log calls, meetings, emails, and to-dos tied to a contact, account, or opportunity |
+| **Reports** | Basic sales and pipeline summaries with filters |
+| **Dashboard** | At-a-glance view of key numbers (open leads, pipeline value, tasks due) |
+
+Modules considered "nice to have" but not essential for V1: Marketing Campaigns, Support Tickets, advanced Analytics — these are better suited for a later version once the core sales workflow is proven.
+
+---
+
+## Database Design
+
+Below is a simplified relational schema. Every table uses an auto-incrementing `id` as its primary key, and foreign keys enforce the relationships between records.
+
+### `users`
+| Column | Type | Notes |
+|---|---|---|
+| id | INT, PK | |
+| name | VARCHAR(100) | |
+| email | VARCHAR(150) | UNIQUE |
+| password_hash | VARCHAR(255) | never store plaintext |
+| role_id | INT, FK → roles.id | |
+| created_at | DATETIME | |
+
+### `roles`
+| Column | Type | Notes |
+|---|---|---|
+| id | INT, PK | |
+| role_name | VARCHAR(50) | e.g. Admin, Sales Rep, Manager |
+
+### `accounts`
+| Column | Type | Notes |
+|---|---|---|
+| id | INT, PK | |
+| company_name | VARCHAR(150) | |
+| industry | VARCHAR(100) | |
+| address | VARCHAR(255) | |
+| owner_id | INT, FK → users.id | assigned rep |
+| created_at | DATETIME | |
+
+### `contacts`
+| Column | Type | Notes |
+|---|---|---|
+| id | INT, PK | |
+| account_id | INT, FK → accounts.id | nullable |
+| first_name | VARCHAR(50) | |
+| last_name | VARCHAR(50) | |
+| email | VARCHAR(150) | |
+| phone | VARCHAR(20) | |
+| owner_id | INT, FK → users.id | |
+| created_at | DATETIME | |
+
+### `leads`
+| Column | Type | Notes |
+|---|---|---|
+| id | INT, PK | |
+| name | VARCHAR(100) | |
+| email | VARCHAR(150) | |
+| phone | VARCHAR(20) | |
+| source | VARCHAR(100) | e.g. Website, Referral |
+| status | ENUM | New, Contacted, Qualified, Converted, Dead |
+| owner_id | INT, FK → users.id | |
+| created_at | DATETIME | |
+
+### `opportunities`
+| Column | Type | Notes |
+|---|---|---|
+| id | INT, PK | |
+| account_id | INT, FK → accounts.id | |
+| contact_id | INT, FK → contacts.id | |
+| name | VARCHAR(150) | |
+| stage | ENUM | Prospecting, Proposal, Negotiation, Closed Won, Closed Lost |
+| amount | DECIMAL(10,2) | |
+| close_date | DATE | |
+| owner_id | INT, FK → users.id | |
+| created_at | DATETIME | |
+
+### `activities`
+| Column | Type | Notes |
+|---|---|---|
+| id | INT, PK | |
+| related_type | ENUM | Contact, Account, Opportunity, Lead |
+| related_id | INT | polymorphic reference to the related record |
+| type | ENUM | Call, Meeting, Email, Task |
+| notes | TEXT | |
+| due_date | DATETIME | nullable, for tasks |
+| completed | BOOLEAN | |
+| owner_id | INT, FK → users.id | |
+| created_at | DATETIME | |
+
+### `tickets` (V2 — support module, not part of MVP)
+| Column | Type | Notes |
+|---|---|---|
+| id | INT, PK | |
+| contact_id | INT, FK → contacts.id | |
+| subject | VARCHAR(150) | |
+| status | ENUM | Open, In Progress, Resolved, Closed |
+| assigned_to | INT, FK → users.id | |
+| created_at | DATETIME | |
+
+---
+
+## Useful Libraries
+
+| Library | Purpose |
+|---|---|
+| **Bootstrap** | Responsive front-end framework — grid layout, forms, buttons, modals without writing custom CSS from scratch |
+| **jQuery** | Simplifies DOM manipulation and AJAX calls between the browser and PHP backend |
+| **DataTables** | Adds sorting, searching, and pagination to HTML tables — essential for Contacts/Leads/Opportunities list views |
+| **Chart.js** | Renders dashboard charts (pipeline by stage, leads by source, revenue over time) |
+| **PHPMailer** | Sends transactional emails (password resets, task reminders, notifications) reliably through SMTP |
+| **Composer** | PHP dependency manager — makes it easy to pull in PHPMailer and other packages and keep them updated |
+| **Font Awesome** | Icon set for a cleaner, more professional UI without custom image assets |
+
+---
+
+## Security Considerations
+
+- **Authentication:** Passwords hashed with `password_hash()` (bcrypt) and verified with `password_verify()` — never stored or compared as plaintext. Sessions regenerated on login (`session_regenerate_id()`) to prevent session fixation.
+- **Authorization:** Role-based access control checked on every server-side request (not just hidden in the UI) — e.g., a Sales Rep should not be able to hit an admin-only endpoint even by guessing the URL.
+- **Password Security:** Minimum length/complexity rules enforced at signup, and a rate limit or lockout after repeated failed login attempts to slow brute-force attacks.
+- **SQL Injection Prevention:** All database queries use PDO or MySQLi **prepared statements** with bound parameters — never string-concatenated SQL.
+- **Cross-Site Scripting (XSS):** All user-supplied data is escaped with `htmlspecialchars()` before being rendered back into HTML; a Content-Security-Policy header adds a second layer of defense.
+- **CSRF Protection:** Forms include a CSRF token validated server-side, preventing forged requests from other sites.
+- **Data Privacy:** Sensitive fields (e.g., customer PII) transmitted only over HTTPS; database backups encrypted; access logs kept for who viewed/edited customer records.
+
+---
+
+## MVP Proposal (Version 1)
+
+The smallest useful CRM would include:
+
+1. **Login/logout with role-based access** (Admin, Sales Rep)
+2. **Contacts and Accounts** — create, view, edit, delete
+3. **Leads** — capture and manually convert to a Contact/Opportunity
+4. **Opportunities** — basic pipeline with stage and amount, no forecasting yet
+5. **Activities/Tasks** — simple log tied to a contact or opportunity, with a due-date list
+6. **One dashboard view** — count of open leads, pipeline value, tasks due today
+
+Deliberately **excluded from V1**: marketing automation, support tickets, advanced reporting/analytics, third-party integrations. These add real value but are not needed to prove the core sales workflow works, and each one meaningfully increases build time and attack surface.
+
+---
+
+## Architecture Diagram
+
+```
++-------------------------------------------------------+
+|                        Browser                         |
+|        (HTML, CSS, JavaScript, jQuery, Bootstrap)       |
++-------------------------------------------------------+
+                          |  HTTP(S) requests / AJAX
+                          v
++-------------------------------------------------------+
+|                  PHP Application Layer                 |
+|  - Authentication & session handling                   |
+|  - Business logic (leads, opportunities, activities)   |
+|  - Input validation & CSRF checks                       |
+|  - PHPMailer (email notifications)                      |
++-------------------------------------------------------+
+                          |  Prepared statements (PDO)
+                          v
++-------------------------------------------------------+
+|                    MySQL Database                       |
+|   users | roles | accounts | contacts | leads           |
+|   opportunities | activities | tickets                  |
++-------------------------------------------------------+
+```
+
+Mermaid version (renders automatically on GitHub if pasted into a `.md` file):
+
+```mermaid
+flowchart TD
+    A[Browser: HTML/CSS/JS/Bootstrap] -->|HTTP/AJAX| B[PHP Application Layer]
+    B -->|Prepared Statements| C[(MySQL Database)]
+    B --> D[PHPMailer / SMTP]
+    C --> E[users / roles]
+    C --> F[accounts / contacts]
+    C --> G[leads / opportunities]
+    C --> H[activities / tickets]
+```
+
+For the actual `architecture/crm_architecture.png` file, take the diagram above (either version) and recreate it visually in Draw.io, Excalidraw, or by exporting the Mermaid diagram as a PNG — then save it into the `architecture/` folder as required by the assignment.
