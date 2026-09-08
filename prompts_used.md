@@ -58,7 +58,17 @@
 - Described data stored in each module
 - Clear and organized
 
----
+Prompt 5: CRM Architecture on PHP/MySQL Stack
+
+Prompt: "I'm building a CRM with HTML, CSS, JavaScript, jQuery, Bootstrap, PHP, and MySQL. What modules, database tables, libraries, and security steps do I need? What's the smallest MVP I could start with?"
+
+Response Quality: EXCELLENT
+
+Gave a clear list of modules instead of a vague feature list
+Suggested a simple database structure with the main tables I'd need
+Recommended useful libraries (Bootstrap, jQuery, DataTables, Chart.js, PHPMailer)
+Covered basic security steps like password hashing and preventing SQL injection
+Suggested a realistic MVP instead of trying to build everything at once
 
 ## AI Effectiveness Analysis
 
